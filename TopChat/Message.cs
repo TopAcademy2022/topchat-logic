@@ -8,83 +8,60 @@ namespace TopChat
 	{
 		private const ushort _DATA_SIZE = 1024;
 
-		private byte[] _data;
+		private static string _userLogin;
 
-		private delegate void AddMessage();
+		private static IPEndPoint _destinationIP;
 
-		private delegate void PrintMessage();
+		private static Socket _listenSocket;
 
-		private event AddMessage _DataChanged;
-
-		private event PrintMessage _WriteStop;
-
-		private string _userLogin;
-
-		private IPEndPoint _destinationIP;
-
-		Socket _listenSocket;
-
-		private List<string> _messageList;
+		private static List<string> _messageList;
 
 		public Message(Socket listenSocket, string userLogin, IPEndPoint destinationIP)
 		{
-			this._data = new byte[_DATA_SIZE];
-			this._DataChanged += this.AddToMessages;
+			_listenSocket = listenSocket;
 
-			this._listenSocket = listenSocket;
+			_userLogin = userLogin;
+			_destinationIP = destinationIP;
 
-			this._userLogin = userLogin;
-			this._destinationIP = destinationIP;
-
-			this._messageList = new List<string>();
-			this._WriteStop += this.PrintAllMessages;
+			_messageList = new List<string>();
 		}
 
-		private async Task Listen()
+		public static void Listen()
 		{
-			int size = await this._listenSocket.ReceiveAsync(this._data);
-
-			if (size > 0)
+			while (true)
 			{
-				this._DataChanged?.Invoke();
+				byte[] _data = new byte[_DATA_SIZE];
+				int size = _listenSocket.Receive(_data);
+
+				if (size > 0)
+				{
+					_messageList.Add(ToString(_data));
+				}
 			}
 		}
 
-		public void Write()
+		public static void Write()
 		{
-			Console.WriteLine("Введите сообщение для отправки:");
-			string data = Console.ReadLine();
-			this._listenSocket.SendTo(Encoding.ASCII.GetBytes(
-				$"{DateTime.Now}.{this._userLogin}: {data}"),
-				this._destinationIP);
-
-			this._WriteStop?.Invoke();
-		}
-
-		public void StartListen()
-		{
-			Task.Run(() => this.Listen());
-		}
-
-		private void AddToMessages()
-		{
-			this._messageList.Add(this.ToString());
-		}
-
-		private void PrintAllMessages()
-		{
-			Thread.Sleep(1000);
-			foreach (string message in this._messageList)
+			while (true)
 			{
-				Console.WriteLine($"Вам отправлено: {message}");
-			}
+				Console.WriteLine("Введите сообщение для отправки:");
+				string data = Console.ReadLine();
+				_listenSocket.SendTo(Encoding.ASCII.GetBytes(
+					$"{DateTime.Now}.{_userLogin}: {data}"),
+					_destinationIP);
 
-			this._messageList.Clear();
+				foreach (string message in _messageList)
+				{
+					Console.WriteLine($"Вам отправлено: {message}");
+				}
+
+				_messageList.Clear();
+			}
 		}
 
-		public override string ToString()
+		public static string ToString(byte[] data)
 		{
-			return Encoding.UTF8.GetString(this._data);
+			return Encoding.UTF8.GetString(data);
 		}
 	}
 }

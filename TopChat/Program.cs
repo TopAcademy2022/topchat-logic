@@ -22,12 +22,11 @@ IPEndPoint myIP = new IPEndPoint(IPAddress.Any, APP_PORT);
 // Привязаться к точке назначения (работать с ней)
 socket.Bind(myIP);
 
-while (true)
-{
-	Message message = new Message(socket, userLogin, destinationEndPoint);
-	message.StartListen();
-	message.Write();
-}
+Message message = new Message(socket, userLogin, destinationEndPoint);
+Thread myThreadListen = new Thread(Message.Listen);
+Thread myThreadWrite = new Thread(Message.Write);
+myThreadListen.Start();
+myThreadWrite.Start();
 
 // Завершить работу по сети
 socket.Close();

@@ -9,12 +9,12 @@ namespace TopChat.Services
 
         protected override string ReturnConnectionString()
         {
-            return $"Data Source={_DATABASE_NAME}";
+            return $"mongodb://localhost:27017/{_DATABASE_NAME}";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMongoDB(this.ConnectionString, "TopChat");
+            optionsBuilder.UseMongoDB(this.ConnectionString, _DATABASE_NAME);
         }
     }
 }

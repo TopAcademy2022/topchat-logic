@@ -1,4 +1,6 @@
-﻿namespace TopChat.Models
+﻿using System.Net.Sockets;
+
+namespace TopChat.Models
 {
 	public class Message
 	{
@@ -6,7 +8,9 @@
 
 		public string Text { get; set; } = null!;
 
-		public User Sender { get; set; } = null!;
+        public NetworkStream stream { get; set; } = null!;
+
+        public User Sender { get; set; } = null!;
 
 		public User Recipient { get; set; } = null!;
 

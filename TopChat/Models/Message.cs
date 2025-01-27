@@ -11,5 +11,9 @@
 		public User Recipient { get; set; } = null!;
 
 		public DateTime DateTime { get; set; }
+
+		public Group RecipientGroup { get; set; } = null!;
+
+		public bool IsGroupMessage { get; set; }
 	}
 }

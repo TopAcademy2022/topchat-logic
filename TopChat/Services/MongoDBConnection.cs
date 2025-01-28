@@ -5,31 +5,16 @@ namespace TopChat.Services
 {
 	public class MongoDBConnection : ADatabaseConnection
 	{
-		public const string _DATABASE_NAME = "/admin";
+		public const string _DATABASE_NAME = "local";
 
 		protected override string ReturnConnectionString()
 		{
-			return $"mongodb://localhost:27017/";
+			return $"mongodb://localhost:27017";
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseMongoDB(this.ConnectionString, _DATABASE_NAME);
-		}
-		public bool CheckConnection(string connectionString)
-		{
-			try
-			{
-				using (var dbContext = new MyDbContext(connectionString))
-				{
-					return dbContext.Database.CanConnect();
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"Ошибка при проверке подключения: {ex.Message}");
-				return false;
-			}
 		}
 	}
 }

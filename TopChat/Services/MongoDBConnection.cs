@@ -1,21 +1,20 @@
-﻿//using Microsoft.EntityFrameworkCore;
-//using TopChat.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using TopChat.Services.Interfaces;
 
-//namespace TopChat.Services
-//{
-//	public class MongoDBConnection : ADatabaseConnection
-//	{
-//		public const string _DATABASE_NAME = "/mongosh+2.3.8";
+namespace TopChat.Services
+{
+	public class MongoDBConnection : ADatabaseConnection
+	{
+		public const string _DATABASE_NAME = "local";
 
-//		protected override string ReturnConnectionString()
-//		{
-//			return $"mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName={_DATABASE_NAME}";
-//		}
+		protected override string ReturnConnectionString()
+		{
+			return $"mongodb://localhost:27017";
+		}
 
-//		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//		{
-//			optionsBuilder.UseMongoDB(this.ConnectionString, _DATABASE_NAME);
-//			Console.WriteLine("Успешное подключение");
-//		}
-//	}
-//}
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseMongoDB(this.ConnectionString, _DATABASE_NAME);
+		}
+	}
+}

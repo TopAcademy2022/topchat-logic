@@ -1,25 +1,18 @@
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver.Core.Configuration;
 using TopChat.Services;
+using TopChat.Services.Interfaces;
 
 namespace TopChat.Tests
 {
-    public class TopChatTests
-    {
-        [Fact]
-        public void MongoDBConnectionTest()
-        {
-            MongoDBConnection connection = new MongoDBConnection();
+	public class TopChatTests
+	{
+		[Fact]
+		public void SqliteConnectionTest()
+		{
+			SqliteConnection connection = new SqliteConnection();
 
-		
-				try
-				{
-				
-				}
-				catch (Exception ex)
-				{
-					Console.WriteLine($"Ошибка при проверке подключения: {ex.Message}");
-					return false;
-				}
-			
-    }
+			Assert.True(connection.Database.CanConnect());
+		}
+	}
 }

@@ -22,10 +22,10 @@ namespace TopChat.Services
             return this._iNetworkDataService.Send(networkData);
         }
 
-        public List<Message> GetMessages(User sender)
-        {
-            NetworkData networkData = this._iNetworkDataService.Get(this._iNetworkDataService.CreateRequest(sender, true));
-            return this._iDataConverterService.ConvertFromNetworkData<List<Message>>(networkData);
-        }
+        //public List<Message> GetMessages(User sender)
+        //{
+        //    NetworkData networkData = this._iNetworkDataService.Get(this._iNetworkDataService.CreateRequest(sender, true));
+        //    return this._iDataConverterService.ConvertFromNetworkData<List<Message>>(networkData);
+        //}
     }
 }

@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
 
-        public string Text { get; set; }
+        public string Text { get; set; } = null!;
 
-        public string PathToFile { get; set; }
+        public string PathToFile { get; set; } = null!;
     }
 }

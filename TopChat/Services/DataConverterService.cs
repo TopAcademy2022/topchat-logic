@@ -5,7 +5,7 @@ namespace TopChat.Services
 {
 	public class DataConverterService : IDataConverterService
 	{
-		public NetworkData Convert<T>(T fromEntity, NetworkData toEntity) where T : class
+		public NetworkData ConvertToNetworkData<T>(T fromEntity) where T : class
 		{
 			switch (fromEntity.GetType().Name)
 			{
@@ -13,5 +13,15 @@ namespace TopChat.Services
 					return new NetworkData();
 			}
 		}
-	}
+
+        public T ConvertFromNetworkData<T>(NetworkData fromEntity) where T : class
+		{
+            Type type = typeof(T);
+            switch (type.Name)
+            {
+                default:
+                    return new Message() as T;
+            }
+        }
+    }
 }

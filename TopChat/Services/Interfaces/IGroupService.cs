@@ -2,14 +2,10 @@
 
 namespace TopChat.Services.Interfaces
 {
-    public interface IGroupService
-    {
-        public Group CreateGroup(string name);
+	public interface IGroupService
+	{
+		public bool AddGroup(string name);
 
-        public void AddUserToGroup(Group group, User userName);
-
-        public void SendMessageToGroup(Group group, string messageText, User sender);
-
-        public void SendUnicastMessage(string destinationIP, int destinationPort, string messageText, string senderLogin);
-    }
+		public void AddUserToGroup(Group group, User userName);
+	}
 }

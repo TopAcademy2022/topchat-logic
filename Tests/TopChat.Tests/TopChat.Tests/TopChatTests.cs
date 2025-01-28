@@ -5,7 +5,7 @@ namespace TopChat.Tests
     public class TopChatTests
     {
         [Fact]
-        public void Test_SetDestination()
+        public void Test_SetDestinationUdp()
         {
             ConnectionProviderUdp connectionProviderUdp = new ConnectionProviderUdp();
 

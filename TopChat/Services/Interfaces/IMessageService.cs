@@ -6,6 +6,6 @@ namespace TopChat.Services.Interfaces
     {
         public bool AddMessage(Message message);
 
-        public List<Message> GetMessages(User sender);
+        //public List<Message> GetMessages(User sender);
     }
 }

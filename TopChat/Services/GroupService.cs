@@ -32,10 +32,6 @@ namespace TopChat.Services
 			{
 				group.Users.Add(user);
 			}
-			else
-			{
-				Console.WriteLine($"{user.Login} is already in the group {group.Name}.");
-			}
 		}
 	}
 }

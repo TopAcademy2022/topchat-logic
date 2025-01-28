@@ -14,5 +14,14 @@ namespace TopChat.Tests
 
 			Assert.True(connection.Database.CanConnect());
 		}
-	}
+
+        [Fact]
+        public void MongoDBConnectionTest()
+        {
+            MongoDBConnection connection = new MongoDBConnection();
+            Assert.True(connection.Database.CanConnect());
+        }
+    }
+
+
 }

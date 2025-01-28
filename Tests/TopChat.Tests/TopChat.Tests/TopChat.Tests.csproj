@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\TopChat\TopChat.csproj" />
+    <ProjectReference Include="..\..\ProgramFileTopchat\ProgramFileTopchat\ProgramFileTopchat.csproj" />
   </ItemGroup>
 
   <ItemGroup>

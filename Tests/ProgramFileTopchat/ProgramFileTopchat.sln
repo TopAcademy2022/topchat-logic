@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramFileTopchat", "ProgramFileTopchat\ProgramFileTopchat.csproj", "{BE995313-9CF4-4C70-863C-E6A4DFD56A6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopChat", "..\..\TopChat\TopChat.csproj", "{84ECB0DD-CDE4-4819-826A-B7A92FAE2699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopChat.Tests", "..\TopChat.Tests\TopChat.Tests\TopChat.Tests.csproj", "{6669EAC5-E51F-42D3-87D8-61875267124E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE995313-9CF4-4C70-863C-E6A4DFD56A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE995313-9CF4-4C70-863C-E6A4DFD56A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE995313-9CF4-4C70-863C-E6A4DFD56A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE995313-9CF4-4C70-863C-E6A4DFD56A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84ECB0DD-CDE4-4819-826A-B7A92FAE2699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84ECB0DD-CDE4-4819-826A-B7A92FAE2699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84ECB0DD-CDE4-4819-826A-B7A92FAE2699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84ECB0DD-CDE4-4819-826A-B7A92FAE2699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6669EAC5-E51F-42D3-87D8-61875267124E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6669EAC5-E51F-42D3-87D8-61875267124E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6669EAC5-E51F-42D3-87D8-61875267124E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6669EAC5-E51F-42D3-87D8-61875267124E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

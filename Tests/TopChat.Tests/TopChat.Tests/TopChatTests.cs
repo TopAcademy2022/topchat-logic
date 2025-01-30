@@ -22,6 +22,4 @@ namespace TopChat.Tests
 		//	Assert.True(connection.Database.CanConnect());
 		//}
 	}
-
-
 }

@@ -27,7 +27,7 @@ namespace TopChat.Tests
 
             Message someMessage = new Message()
             {
-                MediaData = new Media()
+                MediaData = new MediaData()
                 {
                     Text = "Test",
                     PathToFile = String.Empty

@@ -6,6 +6,7 @@ namespace TopChat.Services
     public class UserServes : IUserServes
     {
         private ADatabaseConnection _db;
+
         public UserServes(ADatabaseConnection db)
         {
             this._db = db;

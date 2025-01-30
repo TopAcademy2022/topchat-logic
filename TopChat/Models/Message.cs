@@ -4,7 +4,7 @@
 	{
 		public int Id { get; set; }
 
-		public Media MediaData { get; set; } = null!;
+		public MediaData MediaData { get; set; } = null!;
 
 		public User Sender { get; set; } = null!;
 

@@ -1,6 +1,6 @@
 ﻿namespace TopChat.Models
 {
-    public class Media
+    public class MediaData
     {
         public int Id { get; set; }
 

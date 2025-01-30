@@ -26,5 +26,10 @@ namespace TopChat.Services
 			this._udpClient.Send(data, this._IPEndPoint);
 			return true;
 		}
+
+		public IPEndPoint GetIPEndPoint()
+		{
+			return this._IPEndPoint;
+		}
 	}
 }

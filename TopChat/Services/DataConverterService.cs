@@ -7,10 +7,18 @@ namespace TopChat.Services
 	{
 		public NetworkData ConvertToNetworkData<T>(T fromEntity) where T : class
 		{
-			switch (fromEntity.GetType().Name)
+            NetworkData result = new NetworkData();
+
+            switch (fromEntity)
 			{
-				default:
-					return new NetworkData();
+				case Message:
+                    Message message = fromEntity as Message;
+                    result.DestinationIP = "127.0.0.1"; //message.Sender.GetIpFromService()
+                    result.DestinationPort = 5000;
+                    result.Data = new byte[50];
+                    return result;
+                default:
+					return result;
 			}
 		}
 

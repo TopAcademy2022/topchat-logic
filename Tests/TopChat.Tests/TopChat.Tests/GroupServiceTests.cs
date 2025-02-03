@@ -28,8 +28,8 @@ namespace TopChat.Tests
             string groupName = "Test Group";
             _groupService.AddGroup(groupName);
 
-            UserServes userServes = new UserServes(new SqliteConnection());
-            userServes.Registration("admin", "admin");
+            //UserServes userServes = new UserServes(new SqliteConnection());
+            //userServes.Registration("admin", "admin");
 
             // Act
             //bool result = _groupService.AddUserToGroup(fromBD, fromBD);

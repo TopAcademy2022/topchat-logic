@@ -18,6 +18,8 @@ namespace TopChat.Tests
 
 		private IUserServes? _userServes;
 
+		~DependencyInjectionSetupTests() => this._connection.Database.EnsureDeleted();
+
 		[Fact]
 		public void DependencyInjectionTest()
 		{

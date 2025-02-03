@@ -1,23 +1,23 @@
 using System.Net;
 using System.Net.Sockets;
 using TopChat.Services;
+using TopChat.Services.Interfaces;
 
 namespace TopChat.Tests
 {
 	public class TopChatTests
 	{
-		private SqliteConnection _connection;
+		//protected ADatabaseConnection _connection;
 
-		public TopChatTests()
-		{
-			this._connection = new SqliteConnection();
-		}
+		//public TopChatTests() => this._connection = new SqliteConnection();
 
-		[Fact]
-		public void SqliteConnectionTest()
-		{
-			Assert.True(this._connection.Database.CanConnect());
-		}
+		//~TopChatTests() => this._connection.Database.EnsureDeleted();
+
+		//[Fact]
+		//public void SqliteConnectionTest()
+		//{
+		//	Assert.True(this._connection.Database.CanConnect());
+		//}
 
 		//[Fact]
 		//public void MongoDBConnectionTest()

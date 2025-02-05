@@ -1,4 +1,6 @@
-﻿namespace TopChat.Models
+﻿using System;
+
+namespace TopChat.Models
 {
 	public class Message
 	{

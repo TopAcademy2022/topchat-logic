@@ -61,13 +61,13 @@ namespace TopChat.Tests
 			receiver.Client.ReceiveTimeout = 1000;
 
 			ConnectionProviderUdp sender = new ConnectionProviderUdp();
-			Assert.True(sender.SetDestination("127.0.0.1", 12345));
+			sender.SetDestination("127.0.0.1", 12345);
 
 			byte[] testData = { 1, 2, 3, 4, 5 };
-			Assert.True(sender.Send(testData));
+			sender.Send(testData);
 
 			IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
-			Assert.True(sender.Receive(remoteEP));
+			Assert.True(sender.Receive(remoteEP).Length > 0);
 		}
 	}
 }

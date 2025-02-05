@@ -8,6 +8,6 @@ namespace TopChat.Services.Interfaces
 
 		public bool Send(byte[] data);
 
-		public bool Receive(IPEndPoint iPEndPoint);
+		public byte[] Receive(IPEndPoint iPEndPoint);
 	}
 }

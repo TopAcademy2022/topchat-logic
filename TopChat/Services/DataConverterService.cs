@@ -1,4 +1,5 @@
-﻿using TopChat.Models;
+﻿using System;
+using TopChat.Models;
 using TopChat.Services.Interfaces;
 
 namespace TopChat.Services
@@ -9,9 +10,9 @@ namespace TopChat.Services
 		{
             NetworkData result = new NetworkData();
 
-            switch (fromEntity)
+            switch (fromEntity.GetType().Name)
 			{
-				case Message:
+				case "Message":
                     Message message = fromEntity as Message;
                     result.DestinationIP = "127.0.0.1"; //message.Sender.GetIpFromService()
                     result.DestinationPort = 5000;

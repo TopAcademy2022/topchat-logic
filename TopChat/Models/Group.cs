@@ -1,4 +1,6 @@
-﻿namespace TopChat.Models
+﻿using System.Collections.Generic;
+
+namespace TopChat.Models
 {
 	public class Group
 	{

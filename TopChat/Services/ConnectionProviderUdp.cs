@@ -23,7 +23,7 @@ namespace TopChat.Services
 
 		public bool Send(byte[] data)
 		{
-			this._udpClient.Send(data, this._IPEndPoint);
+			this._udpClient.Send(data, data.Length, this._IPEndPoint);
 			return true;
 		}
 

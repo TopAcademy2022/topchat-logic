@@ -3,6 +3,9 @@ using System.Net;
 using System.Text;
 using TopChat.Models;
 using TopChat.Services.Interfaces;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace TopChat.Services
 {
@@ -20,8 +23,9 @@ namespace TopChat.Services
 				// _AllGroups.Add(group);
 				return true;
 			}
-			catch (Exception)
+			catch (Exception exception)
 			{
+				// Log exception.Message;
 				return false;
 			}
 		}

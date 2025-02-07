@@ -1,4 +1,6 @@
-﻿using TopChat.Models;
+﻿using System;
+using System.Linq;
+using TopChat.Models;
 using TopChat.Services.Interfaces;
 
 namespace TopChat.Services

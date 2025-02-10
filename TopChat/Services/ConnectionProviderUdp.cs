@@ -8,7 +8,7 @@ namespace TopChat.Services
 	{
 		private UdpClient _udpClient;
 
-		private IPEndPoint _IPEndPoint;
+		private IPEndPoint? _IPEndPoint;
 
 		public ConnectionProviderUdp()
 		{
@@ -27,12 +27,17 @@ namespace TopChat.Services
 			return true;
 		}
 
-		public byte[] Receive(IPEndPoint iPEndPoint)
+		public byte[] Receive(IPEndPoint? iPEndPoint = null)
 		{
+			if (iPEndPoint == null)
+			{
+				iPEndPoint = this._IPEndPoint;
+			}
+
 			return this._udpClient.Receive(ref iPEndPoint);
 		}
 
-		public IPEndPoint GetIPEndPoint()
+		public IPEndPoint? GetIPEndPoint()
 		{
 			return this._IPEndPoint;
 		}

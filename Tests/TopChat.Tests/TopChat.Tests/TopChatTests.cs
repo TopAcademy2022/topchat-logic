@@ -53,5 +53,21 @@ namespace TopChat.Tests
 
 			Assert.Equal(testData, receivedData);
 		}
+
+		//[Fact]
+		//public void ReceiveUdpTest()
+		//{
+		//	using UdpClient receiver = new UdpClient(12345);
+		//	receiver.Client.ReceiveTimeout = 1000;
+
+		//	ConnectionProviderUdp sender = new ConnectionProviderUdp();
+		//	sender.SetDestination("127.0.0.1", 12345);
+
+		//	byte[] testData = { 1, 2, 3, 4, 5 };
+		//	sender.Send(testData);
+
+		//	IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
+		//	Assert.True(sender.Receive(remoteEP).Length > 0);
+		//}
 	}
 }

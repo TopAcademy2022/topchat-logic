@@ -27,6 +27,11 @@ namespace TopChat.Services
 			return true;
 		}
 
+		public byte[] Receive(IPEndPoint iPEndPoint)
+		{
+			return this._udpClient.Receive(ref iPEndPoint);
+		}
+
 		public IPEndPoint GetIPEndPoint()
 		{
 			return this._IPEndPoint;

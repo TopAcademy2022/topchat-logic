@@ -2,6 +2,9 @@
 {
     public interface IUserServes
     {
-        public bool Registration(string password, string login);
-    }
+		public bool Registration(string login, string password);
+
+		public bool FindUser( string login);
+
+	}
 }

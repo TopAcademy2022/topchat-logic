@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace TopChat.Services.Interfaces
 {
@@ -8,6 +10,6 @@ namespace TopChat.Services.Interfaces
 
 		public bool Send(byte[] data);
 
-		public byte[] Receive(IPEndPoint iPEndPoint);
+		public Task<UdpReceiveResult> ReceiveAsync(IPEndPoint? iPEndPoint = null);
 	}
 }

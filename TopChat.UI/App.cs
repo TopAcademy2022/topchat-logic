@@ -23,9 +23,17 @@ namespace TopChat.UI
                     this._kernelService.Init();
 					break;
 				case "--list":
+                    this._kernelService.LoadDefaultPlugins();
                     this._userInterface.PrintPluginList();
                     break;
-				case "--help":
+                case "--load":
+                    this._kernelService.LoadDefaultPlugins();
+                    break;
+                case "--switch":
+                    this._kernelService.LoadDefaultPlugins();
+                    this._userInterface.SelectPluginFromList();
+                    break;
+                case "--help":
 					// Print command list
 					break;
 				default:

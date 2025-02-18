@@ -5,5 +5,7 @@
         public void PrintMenu();
 
 		public void PrintPluginList();
+
+        public void SelectPluginFromList();
 	}
 }

@@ -12,7 +12,7 @@ namespace TopChat.Application.Services
     {
         private readonly List<IPlugin> _plugins;
 
-        private readonly Dictionary<string, PluginRealization> _realizations;
+        private readonly Dictionary<string, List<PluginRealization>> _realizations;
 
         private readonly ILogger _logger;
 
@@ -25,7 +25,7 @@ namespace TopChat.Application.Services
             IDependencyInjection dependencyInjection)
         {
             this._plugins = new List<IPlugin>();
-            this._realizations = new Dictionary<string, PluginRealization>();
+            this._realizations = new Dictionary<string, List<PluginRealization>>();
             this._logger = logger;
             this._configuration = configuration;
             this._dependencyInjection = dependencyInjection;
@@ -44,33 +44,42 @@ namespace TopChat.Application.Services
 
 		public void LoadPlugin(string pathToPlugin)
         {
-            Assembly? loadedPlugin = Assembly.LoadFrom(pathToPlugin);
-
-            if (loadedPlugin != null)
+            if (!String.IsNullOrEmpty(pathToPlugin) && pathToPlugin.Contains(".dll"))
             {
-                foreach (Type? classFromPlugin in loadedPlugin.GetTypes())
-                {
-                    if (classFromPlugin != null)
-                    {
-                        // && typeof(IPlugin).IsAssignableFrom(classFromPlugin)
-                        if (!classFromPlugin.IsInterface)
-                        {
-                            IPlugin? plugin = Activator.CreateInstance(classFromPlugin) as IPlugin;
-                            if (plugin != null)
-                            {
-                                this._plugins.Add(plugin);
+                Assembly? loadedPlugin = Assembly.LoadFrom(pathToPlugin);
 
-                                // Register realizations
-                                string pluginName = plugin.GetName();
-                                foreach (PluginRealization realization in plugin.GetRealizations())
+                if (loadedPlugin != null)
+                {
+                    foreach (Type? classFromPlugin in loadedPlugin.GetTypes())
+                    {
+                        if (classFromPlugin != null && !classFromPlugin.Name.Contains("Attribute"))
+                        {
+                            // && typeof(IPlugin).IsAssignableFrom(classFromPlugin)
+                            if (!classFromPlugin.IsInterface)
+                            {
+                                IPlugin? plugin = Activator.CreateInstance(classFromPlugin) as IPlugin;
+                                if (plugin != null)
                                 {
-                                    this._realizations.Add(pluginName, realization);
+                                    this._plugins.Add(plugin);
+
+                                    // Register realizations
+                                    string pluginName = plugin.GetName();
+                                    List<PluginRealization> realizations = new List<PluginRealization>();
+                                    foreach (PluginRealization realization in plugin.GetRealizations())
+                                    {
+                                        realizations.Add(realization);
+                                    }
+                                    this._realizations.Add(pluginName, realizations);
+                                    this._logger.Log($"Plugin {plugin.GetName()} loaded.");
                                 }
-                                this._logger.Log($"Plugin {plugin.GetName()} loaded.");
                             }
                         }
                     }
                 }
+            }
+            else
+            {
+                this._logger.Log($"Warning: loading bad path = {pathToPlugin}");
             }
         }
 
@@ -103,6 +112,59 @@ namespace TopChat.Application.Services
         public List<IPlugin> GetPlugins()
         {
             return this._plugins;
+        }
+
+        public void RegisterPluginRealizations(string pluginName)
+        {
+            if (this._realizations.ContainsKey(pluginName))
+            {
+                List<PluginRealization> realizations = this._realizations[pluginName];
+                foreach (PluginRealization realization in realizations)
+                {
+                    Type? overrideInterface = this.GetClassFromAssembly(realization.InterfaceName);
+                    Type? interfaceRealization = this.GetClassFromAssembly(realization.RealizationClassName);
+
+                    if (overrideInterface != null && interfaceRealization != null)
+                    {
+                        this._dependencyInjection.AddScope(overrideInterface, interfaceRealization);
+                    }
+                }
+            }
+        }
+
+        public Type? GetClassFromAssembly(string className)
+        {
+            const string API_ASSEMBLY_NAME = "TopChat.API";
+            List<string> pluginsName = new List<string>();
+
+            foreach (IPlugin plugin in this._plugins)
+            {
+                pluginsName.Add(plugin.GetName());
+            }
+
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            List<Assembly> needed = new List<Assembly>();
+
+            foreach (Assembly assembly in assemblies)
+            {
+                if (assembly.FullName.Contains(API_ASSEMBLY_NAME) ||
+                    pluginsName.Exists(item => assembly.FullName.Contains(item)))
+                {
+                    needed.Add(assembly);
+                }
+            }
+
+            foreach (Assembly assembly in needed)
+            {
+                Type? type = assembly.GetType(className);
+
+                if (type != null)
+                {
+                    return type;
+                }
+            }
+
+            return null;
         }
     }
 }

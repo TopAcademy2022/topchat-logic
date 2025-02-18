@@ -1,7 +1,9 @@
-﻿namespace TopChat.API.Interfaces
+﻿using System;
+
+namespace TopChat.API.Interfaces
 {
 	public interface IDependencyInjection
 	{
-		public void AddScope<I, R>() where I : class where R : class;
+		public void AddScope(Type classInterface, Type realization);
 	}
 }

@@ -16,7 +16,7 @@ try
         services.AddScoped<IConfiguration, JsonConfiguration>();
 		services.AddScoped<IDependencyInjection, DefaultDependencyInjection>();
 		//services.AddScoped<AppDbContext, SqliteConnection>();
-		services.AddScoped<IUserInterface, UtilitiUserInterface>();
+		services.AddScoped<IUserInterface, UtilityUserInterface>();
 	}
     else
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TopChat.API.Interfaces;
 
 namespace TopChat.Domain.Interfaces
@@ -14,5 +15,9 @@ namespace TopChat.Domain.Interfaces
         public void InvokePlugins();
 
         public List<IPlugin> GetPlugins();
+
+        public void RegisterPluginRealizations(string pluginName);
+
+        public Type? GetClassFromAssembly(string className);
 	}
 }

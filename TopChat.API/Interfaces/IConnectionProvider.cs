@@ -2,7 +2,9 @@
 {
     public interface IConnectionProvider
     {
-        public bool Send(byte[] data);
+        public void SetPort(int port);
+
+        public bool Send(byte[] data, string destinationIp, int destinationPort);
 
         public byte[] Receive();
     }

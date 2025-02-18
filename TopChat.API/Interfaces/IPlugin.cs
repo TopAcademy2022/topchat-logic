@@ -7,6 +7,8 @@ namespace TopChat.API.Interfaces
     {
         public string GetName();
 
+        public string GetVersion();
+
         public List<PluginRealization> GetRealizations();
 
         public void Invoke();

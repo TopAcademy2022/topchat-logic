@@ -1,10 +1,11 @@
-﻿using TopChat.API.Interfaces;
+﻿using System;
+using TopChat.API.Interfaces;
 
 namespace TopChat.Infrastruction.Services
 {
     public class DefaultDependencyInjection : IDependencyInjection
     {
-        public void AddScope<I, R>() where I : class where R : class
+        public void AddScope(Type classInterface, Type realization)
         {
 
         }

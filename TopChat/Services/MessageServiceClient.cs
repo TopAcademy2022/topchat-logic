@@ -1,4 +1,5 @@
-﻿using TopChat.Models;
+﻿using System.Collections.Generic;
+using TopChat.Models;
 using TopChat.Services.Interfaces;
 
 namespace TopChat.Services
@@ -22,10 +23,11 @@ namespace TopChat.Services
             return this._iNetworkDataService.Send(networkData);
         }
 
-        //public List<Message> GetMessages(User sender)
-        //{
-        //    NetworkData networkData = this._iNetworkDataService.Get(this._iNetworkDataService.CreateRequest(sender, true));
-        //    return this._iDataConverterService.ConvertFromNetworkData<List<Message>>(networkData);
-        //}
+        public List<Message> GetMessages(User sender, SendType type)
+        {
+            NetworkData networkData = this._iNetworkDataService.Get(this._iNetworkDataService.CreateRequest(sender, type));
+            return this._iDataConverterService.ConvertFromNetworkData(networkData);
+        }
+
     }
 }

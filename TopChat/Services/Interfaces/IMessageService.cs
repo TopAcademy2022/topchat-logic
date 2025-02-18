@@ -1,4 +1,5 @@
-﻿using TopChat.Models;
+﻿using System.Collections.Generic;
+using TopChat.Models;
 
 namespace TopChat.Services.Interfaces
 {
@@ -6,6 +7,6 @@ namespace TopChat.Services.Interfaces
     {
         public bool AddMessage(Message message);
 
-        //public List<Message> GetMessages(User sender);
+		public List<Message> GetMessages(User sender, SendType type);
     }
 }

@@ -8,9 +8,9 @@ namespace TopChat.Models
 
 		public Media MediaData { get; set; } = null!;
 
-		public User Sender { get; set; } = null!;
+		public User? Sender { get; set; } 
 
-		public User Recipient { get; set; } = null!;
+		public User? Recipient { get; set; }
 
 		public DateTime DateTime { get; set; }
 	}

@@ -8,6 +8,6 @@ namespace TopChat.Services.Interfaces
 
         public NetworkData Get(NetworkData request);
 
-		public NetworkData CreateRequest(object entity, bool sendType);
+		public NetworkData CreateRequest(User entity, SendType type);
     }
 }

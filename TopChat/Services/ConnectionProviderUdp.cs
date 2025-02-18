@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using TopChat.Services.Interfaces;
 
 namespace TopChat.Services
@@ -11,10 +10,7 @@ namespace TopChat.Services
 
 		private IPEndPoint _IPEndPoint;
 
-		public ConnectionProviderUdp()
-		{
-			this._udpClient = new UdpClient();
-		}
+		public ConnectionProviderUdp() => this._udpClient = new UdpClient();
 
 		public bool SetDestination(string destinationIP, int destinationPort)
 		{
@@ -24,22 +20,21 @@ namespace TopChat.Services
 
 		public bool Send(byte[] data)
 		{
-			//this._udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 			this._udpClient.Send(data, data.Length, this._IPEndPoint);
 
 			return true;
 		}
 
-		public async Task<UdpReceiveResult> ReceiveAsync(IPEndPoint? iPEndPoint = null)
+		public byte[] StartReceive(IPEndPoint? iPEndPoint = null)
 		{
 			if (iPEndPoint == null)
 			{
-				iPEndPoint = this._IPEndPoint; 
+				iPEndPoint = this._IPEndPoint;
 			}
 
 			this._udpClient.Connect(this._IPEndPoint);
 
-			return await _udpClient.ReceiveAsync();
+			return this._udpClient.Receive(ref this._IPEndPoint);
 		}
 
 		public IPEndPoint GetIPEndPoint()

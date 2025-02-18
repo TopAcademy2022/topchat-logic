@@ -1,36 +1,66 @@
-﻿using System;
+﻿using SharpCompress.Common;
+using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Net;
+using System.Text;
 using TopChat.Models;
 using TopChat.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace TopChat.Services
 {
 	public class DataConverterService : IDataConverterService
 	{
-		public NetworkData ConvertToNetworkData<T>(T fromEntity) where T : class
+		public NetworkData ConvertToNetworkData(Message fromEntity) 
 		{
-            NetworkData result = new NetworkData();
+			NetworkData result = new NetworkData();
 
-            switch (fromEntity.GetType().Name)
+				result.DestinationIP = "127.0.0.1"; //message.Sender.GetIpFromService()
+				result.DestinationPort = 5000;
+
+			if (fromEntity.MediaData.Text != "" && fromEntity.MediaData.PathToFile == null)
 			{
-				case "Message":
-                    Message message = fromEntity as Message;
-                    result.DestinationIP = "127.0.0.1"; //message.Sender.GetIpFromService()
-                    result.DestinationPort = 5000;
-                    result.Data = new byte[50];
-                    return result;
-                default:
-					return result;
+				result.Data = new byte[1024];
+				string dataText = $"{fromEntity.DateTime}|{fromEntity.MediaData.Text}";
+				result.Data = Encoding.UTF8.GetBytes(dataText);
+
+				return result;
 			}
+			else
+			{
+				result.Data = File.ReadAllBytes(fromEntity.MediaData.PathToFile);
+
+				byte[] fileNameBytes = System.Text.Encoding.UTF8.GetBytes(Path.GetFileName(fromEntity.MediaData.PathToFile));
+			}
+			return result;
 		}
 
-        public T ConvertFromNetworkData<T>(NetworkData fromEntity) where T : class
+		public List<Message> ConvertFromNetworkData(NetworkData result)
 		{
-            Type type = typeof(T);
-            switch (type.Name)
-            {
-                default:
-                    return new Message() as T;
-            }
-        }
-    }
+
+			List < Message > messages = new List < Message >();
+
+			byte[] received = new byte[1024];
+
+			if (Convert.ToInt32(result.Data) < 1024)
+			{
+				byte[] receivedBytes = result.Data;
+				string receivedText = Encoding.UTF8.GetString(receivedBytes);
+
+				string[] splitText = receivedText.Split('|');
+
+				if (splitText[0] == "get")
+				{
+					messages.Add(new Message() { });
+				}
+
+			}
+			else
+			{
+
+			}
+			return messages;
+		}
+	}
 }
